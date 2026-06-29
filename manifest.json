@@ -1,4 +1,5 @@
 {
+  
   "name": "Catálogo BuyPal",
   "identifier": "buyPal-catalogo",
   "permissions": ["conversation"],
