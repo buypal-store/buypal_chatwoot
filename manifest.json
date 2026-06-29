@@ -1,0 +1,7 @@
+{
+  "name": "Catálogo BuyPal",
+  "identifier": "buyPal-catalogo",
+  "permissions": ["conversation"],
+  "location": "conversation_sidebar",
+  "iframe_url": "https://buypal-store.github.io/buypal_chatwoot/?conversation_id={conversationId}"
+}
