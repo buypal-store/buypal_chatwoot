@@ -829,16 +829,18 @@ function autocompletarCampos(datos) {
   // Mapeo de los campos que devuelve tu IA (Code in JavaScript3) a los IDs del HTML
   const mapeo = {
     nombre: 'campoCliente',
-    dni: 'campoDNI',
-    numero: 'campoCelular',
-    direccion: 'campoDireccion',
-    distrito: 'campoDistrito',
-    zona: 'campoZona',
-    correo: 'campoCorreo',
-    agente: 'campoAgente',
-    metodo_pago: 'campoFormaPago',
-    tipo_envio: 'campoReparto',
-    // Puedes agregar más si tu IA devuelve otros campos
+  dni: 'campoDNI',
+  numero: 'campoCelular',
+  direccion: 'campoDireccion',
+  distrito: 'campoDistrito',
+  zona: 'campoZona',
+  correo: 'campoCorreo',
+  agente: 'campoAgente',
+  metodo_pago: 'campoFormaPago',
+  tipo_envio: 'campoReparto',
+  live: 'campoPlataforma',
+  link_maps: 'campoUbicacion',
+  adelanto: 'campoAdelanto',
   };
 
   Object.entries(datos).forEach(([clave, valor]) => {
