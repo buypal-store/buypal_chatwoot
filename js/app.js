@@ -59,8 +59,8 @@ function renderGrid() {
       });
       state.cart.push({
         cartId: ++state.cartSeq,
-        sku: 'GUANTE-NYLON',
-        nombre: 'Guante de nylon (regalo)',
+        sku: 'MEMORIA-64GB',
+        nombre: 'Memoria 64GB (regalo)',   // o el nombre que prefieras
         precio: 0,
         type: 'regalo'
       });
