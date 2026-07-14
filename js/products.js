@@ -50,7 +50,7 @@ window.productosData = [
 
 
   
-  
+  /*
   
   { sku: "CAMARA-ESPIA-A9", nombre: "Cámara Espía A9", precio: "", imagen: "imagenes/Basicas Interiores/MINI ESPÍA.jpg" },
   { sku: "CAMARA-FOCO", nombre: "Cámara Foco", precio: "", imagen: "imagenes/Basicas Interiores/Cámara Foco.jpg" },
@@ -99,4 +99,5 @@ window.productosData = [
   { sku: "PANEL-SOLAR-300W", nombre: "Panel Solar 300W", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=PANEL+SOLAR+300W" },
   { sku: "RANGER 2 - 5MP", nombre: "Ranger 2 5MP", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=RANGER+2+5MP" },
   { sku: "RANGER RC - 5MP", nombre: "Ranger RC 5MP", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=RANGER+RC+5MP" }
+  */
 ];
