@@ -50,26 +50,30 @@ function renderGrid() {
       const prod = productos[index];
       const sku = prod.sku; // siempre el SKU original del producto
 
-      state.cart.push({
-        cartId: ++state.cartSeq,
-        sku: sku,
-        nombre: prod.nombre || 'Escalera',
-        precio: Number(prod.precio) || 0,
-        type: 'escalera'
-      });
+       state.cart.push({
+      cartId: ++state.cartSeq,
+      sku: sku,
+      nombre: prod.nombre || 'Escalera',
+      precio: Number(prod.precio) || 0,
+      type: 'escalera'
+    });
+
+    // 2️⃣ Agregar la memoria de regalo SOLO si NO es el NVR-10C-IMOU
+    if (sku !== 'NVR-10C-IMOU') {
       state.cart.push({
         cartId: ++state.cartSeq,
         sku: 'MEMORIA-64GB',
-        nombre: 'Memoria 64GB (regalo)',   // o el nombre que prefieras
+        nombre: 'Memoria 64GB (regalo)',
         precio: 0,
         type: 'regalo'
       });
+    }
 
-      actualizarContador();
-      this.textContent = '✓ Agregado';
-      setTimeout(() => { this.textContent = 'Agregar'; }, 600);
-    });
+    actualizarContador();
+    this.textContent = '✓ Agregado';
+    setTimeout(() => { this.textContent = 'Agregar'; }, 600);
   });
+});
 }
 
 // ---------- CONTADOR DEL CARRITO ----------
