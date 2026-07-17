@@ -59,7 +59,7 @@ function renderGrid() {
     });
 
     // 2️⃣ Agregar la memoria de regalo SOLO si NO es el NVR-10C-IMOU
-    if (sku !== 'NVR-10C-IMOU') {
+    if (sku !== 'NVR-10C-IMOU' && sku !== 'MEMORIA-64GB' && sku !== 'MEMORIA-128GB' && sku !== 'MEMORIA-256GB' && sku !== 'MEMORIA-512GB') {
       state.cart.push({
         cartId: ++state.cartSeq,
         sku: 'MEMORIA-64GB',
