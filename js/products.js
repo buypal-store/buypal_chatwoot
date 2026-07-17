@@ -1,5 +1,5 @@
 window.productosData = [
-  // ========== CON IMAGEN (42) ==========
+  
 { sku: "CAMIP-INTERIOR-DOBLE", nombre: "Cámara Interior Dual", precio: 99, imagen: "imagenes/Basicas Interiores/Interior Dual.jpg" },
 { sku: "CAMIP-VIDEOLLAMADA", nombre: "Cámara Videollamada", precio: 79, imagen: "imagenes/Basicas Interiores/Cámara Pantalla.jpg" },
 { sku: "CAMIP-A32", nombre: "Cámara Exterior A32", precio: 129, imagen: "imagenes/Basicas Exteriores/A32.jpg" },
@@ -41,12 +41,11 @@ window.productosData = [
 { sku: "TAPO-C211 (2K Negro)", nombre: "Tapo C211 (2K Negro)", precio: 129, imagen: "imagenes/Tapo/TAPO C211.jpg" },
 { sku: "TAPO-C200C (1080p Blanco)", nombre: "Tapo C200C (1080p Blanco)", precio: 109, imagen: "imagenes/Tapo/TAPO C200C.jpg.jpeg" },
 { sku: "OPALUX-ALARMA-CONTROL-58C", nombre: "Opalux Alarma 60W Comunitaria", precio: 129, imagen: "imagenes/Tapo/SIRENA COMUNITARIA.jpg.jpeg" },
-
   
-
-
-
-
+{ sku: "MEMORIA-64GB", nombre: "Memoria 64GB", precio: 40, imagen: "memorias/MEMORIA 64 GB.jpg" },
+{ sku: "MEMORIA-128GB", nombre: "Memoria 128GB", precio: 80, imagen: "memorias/MEMORIA 128 GB.jpg" },
+{ sku: "MEMORIA-256GB", nombre: "Memoria 256GB", precio: 149, imagen: "memorias/MEMORIA 256 GB.jpg" },
+{ sku: "MEMORIA-512GB", nombre: "Memoria 512GB", precio: 200, imagen: "memorias/MEMORIA 512 GB.jpg" },
 
 
   
