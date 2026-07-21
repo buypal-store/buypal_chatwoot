@@ -482,4 +482,14 @@ function init() {
   }
 }
 
+// Asignar fecha de hoy al campo (respaldo fuera de init)
+const fechaInput = document.getElementById('campoFecha');
+if (fechaInput) {
+  const hoy = new Date();
+  const fechaFormateada = hoy.getFullYear() + '-' +
+    String(hoy.getMonth() + 1).padStart(2, '0') + '-' +
+    String(hoy.getDate()).padStart(2, '0');
+  fechaInput.value = fechaFormateada;
+}
+
 document.addEventListener("DOMContentLoaded", init);
