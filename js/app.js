@@ -1,6 +1,6 @@
 /* ==========================================
-   CATÁLOGO DE ESCALERAS – LÓGICA COMPLETA
-   (con autocompletado desde n8n)
+   CATÁLOGO DE CÁMARAS – LÓGICA COMPLETA
+   (con edición de precios, regalo y clear instantáneo)
    ========================================== */
 
 const state = {
@@ -27,10 +27,10 @@ function renderGrid() {
     card.className = "card";
     card.innerHTML = `
       <div class="card-img">
-        <img src="${prod.imagen || 'assets/images/placeholder.jpg'}" alt="${prod.nombre || 'Escalera'}">
+        <img src="${prod.imagen || 'assets/images/placeholder.jpg'}" alt="${prod.nombre || 'Cámara'}">
       </div>
       <div class="card-body">
-        <div class="card-name">${prod.nombre || 'Escalera'}</div>
+        <div class="card-name">${prod.nombre || 'Cámara'}</div>
         <div class="card-meta">
           <span class="sku-display">${prod.sku || ''}</span>
           <div class="price">${formatPEN(prod.precio)}</div>
@@ -48,32 +48,35 @@ function renderGrid() {
     btn.addEventListener('click', function (e) {
       const index = parseInt(this.dataset.index);
       const prod = productos[index];
-      const sku = prod.sku; // siempre el SKU original del producto
+      const sku = prod.sku;
 
-       state.cart.push({
-      cartId: ++state.cartSeq,
-      sku: sku,
-      nombre: prod.nombre || 'Escalera',
-      precio: Number(prod.precio) || 0,
-      type: 'escalera'
-    });
-
-    // 2️⃣ Agregar la memoria de regalo SOLO si NO es el NVR-10C-IMOU
-    if (sku !== 'NVR-10C-IMOU' && sku !== 'MEMORIA-64GB' && sku !== 'MEMORIA-128GB' && sku !== 'MEMORIA-256GB' && sku !== 'MEMORIA-512GB') {
+      // 🔁 Producto principal con precio original guardado
       state.cart.push({
         cartId: ++state.cartSeq,
-        sku: 'MEMORIA-64GB',
-        nombre: 'Memoria 64GB (regalo)',
-        precio: 0,
-        type: 'regalo'
+        sku: sku,
+        nombre: prod.nombre || 'Cámara',
+        precio: Number(prod.precio) || 0,
+        originalPrice: Number(prod.precio) || 0,   // 👈 para restaurar precio
+        type: 'camara'
       });
-    }
 
-    actualizarContador();
-    this.textContent = '✓ Agregado';
-    setTimeout(() => { this.textContent = 'Agregar'; }, 600);
+      // Regalo automático (memoria 64GB) si no es NVR-10C-IMOU ni memoria
+      if (sku !== 'NVR-10C-IMOU' && sku !== 'MEMORIA-64GB' && sku !== 'MEMORIA-128GB' && sku !== 'MEMORIA-256GB' && sku !== 'MEMORIA-512GB') {
+        state.cart.push({
+          cartId: ++state.cartSeq,
+          sku: 'MEMORIA-64GB',
+          nombre: 'Memoria 64GB (regalo)',
+          precio: 0,
+          originalPrice: 0,   // el regalo empieza en 0
+          type: 'regalo'
+        });
+      }
+
+      actualizarContador();
+      this.textContent = '✓ Agregado';
+      setTimeout(() => { this.textContent = 'Agregar'; }, 600);
+    });
   });
-});
 }
 
 // ---------- CONTADOR DEL CARRITO ----------
@@ -91,7 +94,7 @@ function vaciarCarrito() {
   actualizarContador();
 }
 
-// ---------- MODAL RESUMEN ----------
+// ---------- MODAL RESUMEN (ventana intermedia) ----------
 function abrirResumen() {
   if (state.cart.length === 0) {
     alert('🛒 No hay productos en el pedido');
@@ -105,6 +108,28 @@ function cerrarResumen() {
   el("summaryModal").classList.add("hidden");
 }
 
+// 🔁 NUEVO: Función para alternar regalo en cualquier producto del carrito
+function toggleRegalo(cartId) {
+  const item = state.cart.find(i => i.cartId === cartId);
+  if (!item) return;
+
+  if (item.regaloOriginalPrice !== undefined) {
+    // Restaurar precio original
+    item.precio = item.regaloOriginalPrice;
+    delete item.regaloOriginalPrice;
+  } else {
+    // Convertir en regalo (guardar precio actual si es >0)
+    if (item.precio > 0) {
+      item.regaloOriginalPrice = item.precio;
+      item.precio = 0;
+    }
+  }
+
+  const nuevoSubtotal = state.cart.reduce((sum, i) => sum + i.precio, 0);
+  state.finalTotal = nuevoSubtotal;
+  renderResumen();
+}
+
 function renderResumen() {
   const lines = el("summaryLines");
   if (!lines) return;
@@ -112,7 +137,7 @@ function renderResumen() {
 
   const subtotal = state.cart.reduce((sum, item) => sum + item.precio, 0);
 
-  // Tabla de productos
+  // 🔁 Tabla con inputs de precio y columna de regalo
   const table = document.createElement("table");
   table.style.width = "100%";
   table.style.borderCollapse = "collapse";
@@ -123,6 +148,7 @@ function renderResumen() {
         <th style="padding:8px; text-align:left; color:var(--muted);">SKU</th>
         <th style="padding:8px; text-align:left; color:var(--muted);">Producto</th>
         <th style="padding:8px; text-align:right; color:var(--muted);">Precio</th>
+        <th style="padding:8px; text-align:center; color:var(--muted);">🎁</th>
       </tr>
     </thead>
     <tbody id="resumenTablaBody"></tbody>
@@ -135,12 +161,74 @@ function renderResumen() {
     row.innerHTML = `
       <td style="padding:6px 8px; border-bottom:1px solid var(--border); font-size:11px; color:var(--muted);">${item.sku}</td>
       <td style="padding:6px 8px; border-bottom:1px solid var(--border);">${item.nombre}</td>
-      <td style="padding:6px 8px; border-bottom:1px solid var(--border); text-align:right; font-weight:700;">${formatPEN(item.precio)}</td>
+      <td style="padding:6px 8px; border-bottom:1px solid var(--border); text-align:right; font-weight:700;">
+        <input type="number"
+               class="resumen-price-input"
+               value="${item.precio}"
+               data-original="${item.originalPrice ?? item.precio}"
+               data-cart-id="${item.cartId}"
+               style="width:90px; text-align:right; font-weight:700; border:1px solid var(--border); border-radius:6px; padding:4px 8px; background:#fff;" />
+      </td>
+      <td style="padding:6px 8px; border-bottom:1px solid var(--border); text-align:center;">
+        <button class="btn-regalo-toggle" data-cart-id="${item.cartId}"
+                style="cursor:pointer; font-size:16px; background:none; border:none;"
+                title="Alternar regalo">${item.precio === 0 ? '🎁' : '🎁'}</button>
+      </td>
     `;
     tbody.appendChild(row);
   });
 
-  // Totales
+  // 🔁 Eventos de los inputs de precio
+  document.querySelectorAll('.resumen-price-input').forEach(input => {
+    input.addEventListener('focus', function() {
+      this.select();
+    });
+    input.addEventListener('blur', function() {
+      const val = this.value.trim();
+      const cartId = parseInt(this.dataset.cartId);
+      const item = state.cart.find(i => i.cartId === cartId);
+      if (!item) return;
+
+      if (val === '' || isNaN(Number(val))) {
+        this.value = this.dataset.original;
+        item.precio = Number(this.dataset.original);
+      } else {
+        const nuevoPrecio = Number(val);
+        item.precio = nuevoPrecio;
+        if (nuevoPrecio > 0 && item.regaloOriginalPrice !== undefined) {
+          delete item.regaloOriginalPrice;
+          const btn = document.querySelector(`.btn-regalo-toggle[data-cart-id="${cartId}"]`);
+          if (btn) btn.textContent = '🎁';
+        }
+      }
+
+      const nuevoSubtotal = state.cart.reduce((sum, i) => sum + i.precio, 0);
+      state.finalTotal = nuevoSubtotal;
+      if (el("inputPrecioFinal")) el("inputPrecioFinal").value = nuevoSubtotal;
+      if (el("resumenFinal")) el("resumenFinal").textContent = formatPEN(nuevoSubtotal);
+    });
+
+    input.addEventListener('input', function() {
+      const tempVal = Number(this.value) || 0;
+      const cartId = parseInt(this.dataset.cartId);
+      const subtotalTemporal = state.cart.reduce((sum, i) => {
+        if (i.cartId === cartId) return sum + tempVal;
+        return sum + i.precio;
+      }, 0);
+      if (el("resumenFinal")) el("resumenFinal").textContent = formatPEN(subtotalTemporal);
+      if (el("inputPrecioFinal")) el("inputPrecioFinal").value = subtotalTemporal;
+    });
+  });
+
+  // 🔁 Eventos de los botones de regalo
+  document.querySelectorAll('.btn-regalo-toggle').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const cartId = parseInt(this.dataset.cartId);
+      toggleRegalo(cartId);
+    });
+  });
+
+  // Bloque de totales (igual que antes)
   const totalBlock = document.createElement("div");
   totalBlock.className = "summary-totals";
   totalBlock.innerHTML = `
@@ -164,7 +252,6 @@ function renderResumen() {
   `;
   lines.appendChild(totalBlock);
 
-  // Sincronizar input con total final
   const inputFinal = el("inputPrecioFinal");
   if (inputFinal) {
     inputFinal.addEventListener("input", function () {
@@ -185,7 +272,7 @@ function renderResumen() {
   }
 }
 
-// ---------- MODAL PEDIDO FINAL ----------
+// ---------- MODAL PEDIDO FINAL (sin cambios relevantes) ----------
 function abrirPedidoFinal() {
   if (state.cart.length === 0) {
     alert('🛒 No hay productos en el pedido');
@@ -197,13 +284,11 @@ function abrirPedidoFinal() {
   renderTablaPedidoFinal();
   el("pedidoModal").classList.remove("hidden");
 
-  // Valores por defecto
   if (el("campoMedio") && !el("campoMedio").value) el("campoMedio").value = "BP";
   if (el("campoTipo") && !el("campoTipo").value) el("campoTipo").value = "Menor";
   if (el("campoTurno") && !el("campoTurno").value) el("campoTurno").value = "T";
   if (el("campoEstado") && !el("campoEstado").value) el("campoEstado").value = "Entregado";
 
-  // ✅ Cargar datos desde n8n (IA)
   cargarDatosDesdeN8n();
 }
 
@@ -235,7 +320,7 @@ function renderTablaPedidoFinal() {
   if (el("campoMonto")) el("campoMonto").value = totalFinal;
 }
 
-// ---------- ENVIAR PEDIDO A n8n ----------
+// ---------- ENVIAR PEDIDO A n8n (sin cambios) ----------
 function enviarPedido() {
   const subtotal = state.cart.reduce((sum, item) => sum + item.precio, 0);
   const totalFinal = state.finalTotal || subtotal;
@@ -274,10 +359,8 @@ function enviarPedido() {
     validacion: el("campoValidacion")?.value || "",
     adelanto: el("campoAdelanto")?.value || "",
     conversation_id: new URLSearchParams(window.location.search).get('conversation_id') || "",
-    fecha: document.getElementById('campoFecha')?.value || "" // 👈 NUEVA LÍNEA
+    fecha: document.getElementById('campoFecha')?.value || ""
   };
-
-  console.log("📤 Enviando a n8n:", payload);
 
   fetch('https://n8n.buypal.com.pe/webhook/Subir_pedido_drive', {
     method: 'POST',
@@ -329,9 +412,9 @@ function autocompletarCampos(datos) {
     distrito: 'campoDistrito',
     correo: 'campoCorreo',
     agente: 'campoAgente',
-    ruc: 'campoRUC',                 // ← faltaba
-    comprobante: 'campoBoleta',      // ← nuevo: Boleta/Factura automático
-    forma_de_pago: 'campoFormaPago', // ← antes decía metodo_pago
+    ruc: 'campoRUC',
+    comprobante: 'campoBoleta',
+    forma_de_pago: 'campoFormaPago',
     live: 'campoPlataforma',
     link_maps: 'campoUbicacion',
     adelanto: 'campoAdelanto',
@@ -370,8 +453,12 @@ function init() {
   bindSearch();
 
   el("btnVerPedido")?.addEventListener("click", abrirResumen);
+  // 🔁 Vaciar carrito sin confirmación y cierra el modal si está abierto
   el("btnClear")?.addEventListener("click", () => {
-    if (confirm("¿Vaciar todo el carrito?")) vaciarCarrito();
+    vaciarCarrito();
+    if (el("summaryModal") && !el("summaryModal").classList.contains("hidden")) {
+      cerrarResumen();
+    }
   });
   el("summaryClose")?.addEventListener("click", cerrarResumen);
   el("pedidoClose")?.addEventListener("click", cerrarPedidoFinal);
@@ -385,7 +472,6 @@ function init() {
   actualizarContador();
   desactivarAutocompletado();
 
-  // 👇 NUEVO: fecha de hoy
   const fechaInput = document.getElementById('campoFecha');
   if (fechaInput) {
     const hoy = new Date();
@@ -394,22 +480,6 @@ function init() {
       String(hoy.getDate()).padStart(2, '0');
     fechaInput.value = fechaFormateada;
   }
-}
-// Asignar fecha de hoy al campo
-const fechaInput = document.getElementById('campoFecha');
-if (fechaInput) {
-  const hoy = new Date();
-  const fechaFormateada = hoy.getFullYear() + '-' +
-    String(hoy.getMonth() + 1).padStart(2, '0') + '-' +
-    String(hoy.getDate()).padStart(2, '0');
-  fechaInput.value = fechaFormateada;
-}
-// ---------- DESACTIVAR SUGERENCIAS DEL NAVEGADOR ----------
-function desactivarAutocompletado() {
-  document.querySelectorAll('.campo-pedido, #searchInput').forEach(campo => {
-    campo.setAttribute('autocomplete', 'off');
-    campo.setAttribute('autocomplete', 'new-password'); // truco anti-Chrome
-  });
 }
 
 document.addEventListener("DOMContentLoaded", init);
