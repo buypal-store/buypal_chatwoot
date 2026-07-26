@@ -1,102 +1,61 @@
-window.productosData = [
-  
-{ sku: "CAMIP-INTERIOR-DOBLE", nombre: "Cámara Interior Dual", precio: 99, imagen: "imagenes/Basicas Interiores/Interior Dual.jpg" },
-{ sku: "CAMIP-VIDEOLLAMADA", nombre: "Cámara Videollamada", precio: 79, imagen: "imagenes/Basicas Interiores/Cámara Pantalla.jpg" },
-{ sku: "CAMIP-A32", nombre: "Cámara Exterior A32", precio: 129, imagen: "imagenes/Basicas Exteriores/A32.jpg" },
-{ sku: "CAMARA-FOCO-DOBLE", nombre: "Cámara Foco Dual", precio: 109, imagen: "https://placehold.co/400x300/1e293b/white?text=CAMARA+FOCO+DOBLE" },
-{ sku: "CAMIP-EXTERIOR", nombre: "Cámara Exterior A6", precio: 99, imagen: "imagenes/Basicas Exteriores/A6.jpg" },
-{ sku: "CAMIP-SOLAR-2-PANELES", nombre: "Cámara Solar Doble Lente", precio: 179, imagen: "imagenes/Solar Wi-Fi/SOLAR DOBLE PANEL.jpg" },
-{ sku: "CAMIP-PULPO-ICSEE", nombre: "Cámara Pulpo Digital", precio: 149, imagen: "imagenes/Basicas Exteriores/PULPO DIGITAL.jpg" },
-{ sku: "CAMIP-PULPO-SOLAR", nombre: "Cámara Pulpo Solar Digital", precio: 279, imagen: "https://placehold.co/400x300/1e293b/white?text=PULPO+SOLAR+DIGITAL" },
-{ sku: "CAMIP-PANORAMICA-Y6", nombre: "Cámara IP Panorámica Y6", precio: 459, imagen: "imagenes/Solar Wi-Fi/SOLAR Y6.jpg" },
-{ sku: "CAMIP-CHIP-S12", nombre: "Cámara Chip Coloso", precio: 279, imagen: "https://placehold.co/400x300/1e293b/white?text=COLOSO" },  
-{ sku: "CAMIP-CHIP-S60", nombre: "Cámara Chip Lite", precio: "199", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+CHIP+S60" },
-{ sku: "CAMIP-CHIP-SD320", nombre: "Cámara Chip Dual", precio: "299", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+CHIP+SD320" },
-{ sku: "CAMIP-CHIP-TQ6", nombre: "Cámara Chip Dual IcSee", precio: "249", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+CHIP+SD320" },  
-{ sku: "CAMIP-CHIP-T6", nombre: "Cámara IP Chip Solar T6", precio: 429, imagen: "imagenes/Chip Solar/SOLAR CHIP T6.jpg" },
-{ sku: "CAMIP-CHIP-Q69", nombre: "Cámara Chip Ojo de Dios x36", precio: "599", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+CHIP+Q69" },
-{ sku: "CAMIP-CHIP-Y5-4K", nombre: "Cámara Chip Y5", precio: "699", imagen: "imagenes/Chip Solar/CHIP Y5.jpg" },  
-{ sku: "CAMIP-T6", nombre: "Cámara Exterior T6", precio: 179, imagen: "imagenes/Largo Alcance/Cámara T6.jpg" },  
-{ sku: "CAMIP-QQ9", nombre: "Cámara Exterior Policia", precio: "179", imagen: "imagenes/Largo Alcance/QQ9.jpg" },
-{ sku: "CAMIP-PULPO", nombre: "Cámara Pulpo Óptico", precio: 219, imagen: "imagenes/Largo Alcance/Cámara Pulpo.jpg" },
-{ sku: "CAMIP-PULPO-5-LENTES", nombre: "Cámara Kraken", precio: "199", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+PULPO+5+LENTES" },
-{ sku: "CAMIP-PULPO-6-LENTES-ZOOM", nombre: "Cámara Titán Pro", precio: "329", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+PULPO+6+LENTES+ZOOM" },
-{ sku: "CAMIP-WIFI-Q69", nombre: "Cámara Ojo de Dios Wi-Fi", precio: "339", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+WIFI+Q69" },
-{ sku: "RANGER MINI - 5MP", nombre: "Ranger Mini", precio: 169, imagen: "imagenes/Imou/RANGER MINI.jpg" },
-{ sku: "FOCO IMOU - 5MP", nombre: "Cámara Foco Imou", precio: 179, imagen: "imagenes/Imou/BULB CAM.jpg" },
-{ sku: "RANGER 2 PRO - 5MP", nombre: "Ranger 2 PRO", precio: 169, imagen: "imagenes/Imou/RANGER 2 PRO.jpg" },
-{ sku: "RANGER 2 PRO - 4K", nombre: "Ranger 2 PRO 4K", precio: 219, imagen: "imagenes/Imou/RANGER 2 PRO 4K.jpg.jpeg" },
-{ sku: "RANGER DUAL LENS - 5MP", nombre: "Ranger 2 Dual", precio: 229, imagen: "imagenes/Imou/RANGER 2 DUAL.jpg" },
-{ sku: "CRUISER SC - 8MP", nombre: "Cruiser SC 4K", precio: 219, imagen: "imagenes/Imou/CRUISER SC.jpg" },
-{ sku: "CRUISER Z - 5MP", nombre: "Cruiser Z Zoom Óptico", precio: 279, imagen: "imagenes/Imou/CRUISER Z.jpg" },
-{ sku: "AURORA TITAN PRO - 6MP", nombre: "Aurora Imou", precio: 239, imagen: "imagenes/Imou/AURORA.jpg" },
-{ sku: "CRUISER DUAL - 5MP", nombre: "Cruiser Dual Imou", precio: 299, imagen: "imagenes/Imou/CRUISER DUAL.jpg" },
-{ sku: "CRUISER AURORA - 4MP", nombre: "Cruiser Dual 2 Pro Imou", precio: "329", imagen: "" },
-{ sku: "CRUISER TRIPLE - 5MP", nombre: "Cruiser Triple Imou", precio: 339, imagen: "imagenes/Imou/CRUISER TRIPLE.jpg" },  
-{ sku: "CRUISER PANO Z - 13MP", nombre: "Cruiser Pano Z Imou", precio: "439", imagen: "imagenes/Imou/CRUISER PANO Z.jpg.jpeg" },
-{ sku: "CRUISER CHIP - AOV PT", nombre: "Cámara 4G AOV PT Imou", precio: 489, imagen: "imagenes/Imou/Cruiser AOV PT.jpg.jpeg" },  
-{ sku: "NVR-10C-IMOU", nombre: "NVR Imou", precio: 179, imagen: "https://placehold.co/400x300/1e293b/white?text=NVR+10C+IMOU" },
-{ sku: "TAPO-C500 (1080p Exterior)", nombre: "Tapo C500 (1080p Exterior)", precio: 169, imagen: "imagenes/Tapo/TAPO C500.jpg" },
-{ sku: "TAPO-C201 (1080p Negro)", nombre: "Tapo C201 (1080p Negro)", precio: 109, imagen: "imagenes/Tapo/TAPO C201.jpg" },
-{ sku: "TAPO-C211 (2K Negro)", nombre: "Tapo C211 (2K Negro)", precio: 129, imagen: "imagenes/Tapo/TAPO C211.jpg" },
-{ sku: "TAPO-C200C (1080p Blanco)", nombre: "Tapo C200C (1080p Blanco)", precio: 109, imagen: "imagenes/Tapo/TAPO C200C.jpg.jpeg" },
-{ sku: "OPALUX-ALARMA-CONTROL-58C", nombre: "Opalux Alarma 60W Comunitaria", precio: 129, imagen: "imagenes/Tapo/SIRENA COMUNITARIA.jpg.jpeg" },
-  
-{ sku: "MEMORIA-64GB", nombre: "Memoria 64GB", precio: 40, imagen: "memorias/MEMORIA 64 GB.jpg" },
-{ sku: "MEMORIA-128GB", nombre: "Memoria 128GB", precio: 80, imagen: "memorias/MEMORIA 128 GB.jpg" },
-{ sku: "MEMORIA-256GB", nombre: "Memoria 256GB", precio: 149, imagen: "memorias/MEMORIA 256 GB.jpg" },
-{ sku: "MEMORIA-512GB", nombre: "Memoria 512GB", precio: 200, imagen: "memorias/MEMORIA 512 GB.jpg" },
+// === Catálogo Strenko — se alimenta solo desde el Google Sheet ===
+const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR_TGbgo-sVm6R7EMGGVAkrztMQ6RxtqAb-9YYJj5lTBlNMG-SU9lseA9a7bT_d8sWTvo0-fXV4xlUH/pub?gid=642137454&single=true&output=csv";
 
+const RUBRO_TIENDA = "BUYPAL SECURITY";   // esta es la tienda de este repo
 
-  
-  /*
-  
-  { sku: "CAMARA-ESPIA-A9", nombre: "Cámara Espía A9", precio: "", imagen: "imagenes/Basicas Interiores/MINI ESPÍA.jpg" },
-  { sku: "CAMARA-FOCO", nombre: "Cámara Foco", precio: "", imagen: "imagenes/Basicas Interiores/Cámara Foco.jpg" },
-  { sku: "CAMARA-SOLAR", nombre: "Cámara Solar", precio: "", imagen: "imagenes/Chip Solar/A31 solar.jpg" },
-  { sku: "CAMIP-A31", nombre: "Cámara IP A31", precio: "", imagen: "imagenes/Basicas Exteriores/A31.jpg" },
-  { sku: "CAMIP-INTERIOR", nombre: "Cámara IP Interior", precio: "", imagen: "imagenes/Basicas Interiores/Cámara interior.jpg" },
-  { sku: "CAMIP-PANORAMICA-Y6", nombre: "Cámara IP Panorámica Y6", precio: 459, imagen: "imagenes/Solar Wi-Fi/SOLAR Y6.jpg" },
-  { sku: "CAMIP-PULPO-SOLAR", nombre: "Cámara IP Pulpo Solar", precio: 279, imagen: "imagenes/Solar Wi-Fi/PULPO SOLAR.jpg" },
-  { sku: "CAMIP-SOLAR-DOBLE-VCS093", nombre: "Cámara IP Solar Doble VCS093", precio: "", imagen: "imagenes/Solar Wi-Fi/Exterior solar Dual.jpg" },
-  { sku: "CRUISER SC - 5MP", nombre: "Cruiser SC 5MP", precio: "", imagen: "imagenes/Imou/CRUISER SC 5MP.jpg" },
-  { sku: "TAPO-C200 (1080p Blanco)", nombre: "Tapo C200 (1080p Blanco)", precio: "", imagen: "imagenes/Tapo/TAPO C200.jpg" },
-  { sku: "TAPO-C210 (2K Blanco)", nombre: "Tapo C210 (2K Blanco)", precio: 129, imagen: "imagenes/Tapo/TAPO C210.jpg" },
-  { sku: "TAPO-C520WS (2K Exterior)", nombre: "Tapo C520WS (2K Exterior)", precio: "", imagen: "imagenes/Tapo/TAPO C520.jpg" },
-  { sku: "TAPO-ENCHUFE-P105", nombre: "Tapo Enchufe P105", precio: 29, imagen: "imagenes/Tapo/ENCHUFE INTELIGENTE TAPO.jpg" },
+// A=SKU  B=Nombre  C=Categoria  D=Precio  E=Stock  F=Linea/Rubro
+const COL = { sku: 0, nombre: 1, categoria: 2, precio: 3, stock: 4, rubro: 5 };
 
-  // ========== SIN IMAGEN — PLACEHOLDER (40) ==========
-  { sku: "ADAPTADOR-POE", nombre: "Adaptador PoE", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=ADAPTADOR+POE" },
-  { sku: "ADAPTADOR-REPUESTO-CAMARA", nombre: "Adaptador Repuesto Cámara", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=ADAPTADOR+REPUESTO+CAMARA" },
-  { sku: "BRAZO-100CM", nombre: "Brazo 100CM", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=BRAZO+100CM" },
-  { sku: "BRAZO-120CM", nombre: "Brazo 120CM", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=BRAZO+120CM" },
-  { sku: "BRAZO-50CM", nombre: "Brazo 50CM", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=BRAZO+50CM" },
-  { sku: "BRAZO-60CM", nombre: "Brazo 60CM", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=BRAZO+60CM" },
-  { sku: "CABLE-RED-10M", nombre: "Cable RED 10M", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CABLE+RED+10M" },
-  { sku: "CABLE-RED-15M", nombre: "Cable RED 15M", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CABLE+RED+15M" },
-  { sku: "CAMARA-CCTV-SIMULADA", nombre: "Cámara CCTV Simulada", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMARA+CCTV+SIMULADA" },
-  { sku: "CAMARA-FOCO-IC008B", nombre: "Cámara Foco IC008B", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMARA+FOCO+IC008B" },
-  { sku: "CAMARA-FOCO-TRIPLE", nombre: "Cámara Foco Triple", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMARA+FOCO+TRIPLE" },
-  { sku: "CAM-AUTO-RETROVISOR", nombre: "Cámara Auto Retrovisor", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CAM+AUTO+RETROVISOR" },
-  { sku: "CAMIP-29Y", nombre: "Cámara IP 29Y", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+29Y" },
-  { sku: "CAMIP-4-LENTES-859B", nombre: "Cámara IP 4 Lentes 859B", precio: 119, imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+4+LENTES+859B" },
-  { sku: "CAMIP-A10", nombre: "Cámara IP A10", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+A10" },
-  { sku: "CAMIP-A28B", nombre: "Cámara IP A28B", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+A28B" },
-  { sku: "CAMIP-A8", nombre: "Cámara IP A8", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+A8" },
-  { sku: "CAMIP-CHIP-538GL-15X", nombre: "Cámara IP Chip 538GL 15X", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+CHIP+538GL+15X" },
-  { sku: "CAMIP-CHIP-S12", nombre: "Cámara IP Chip S12", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+CHIP+S12" },
-  { sku: "CAMIP-CHIP-ST63", nombre: "Cámara IP Chip ST63", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+CHIP+ST63" },
-  { sku: "CAMIP-CHIP-TQ5", nombre: "Cámara IP Chip TQ5", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+CHIP+TQ5" },
-  { sku: "CAMIP-ESPIA-4G", nombre: "Cámara IP Espía 4G", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+ESPIA+4G" },
-  { sku: "CAMIP-EXTERIOR", nombre: "Cámara IP Exterior", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+EXTERIOR" },
-  { sku: "CAMIP-EXTERIOR DOMO", nombre: "Cámara IP Exterior Domo", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=CAMIP+EXTERIOR+DOMO" },
-  { sku: "ESTANTE-BEBE-5", nombre: "Estante Bebé 5", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=ESTANTE+BEBE+5" },
-  { sku: "MEMORIA-128GB", nombre: "Memoria 128GB", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=MEMORIA+128GB" },
-  { sku: "MEMORIA-256GB", nombre: "Memoria 256GB", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=MEMORIA+256GB" },
-  { sku: "MEMORIA-64GB", nombre: "Memoria 64GB", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=MEMORIA+64GB" },
-  { sku: "NVR-HIKVISION", nombre: "NVR Hikvision", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=NVR+HIKVISION" },
-  { sku: "PANEL-SOLAR-300W", nombre: "Panel Solar 300W", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=PANEL+SOLAR+300W" },
-  { sku: "RANGER 2 - 5MP", nombre: "Ranger 2 5MP", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=RANGER+2+5MP" },
-  { sku: "RANGER RC - 5MP", nombre: "Ranger RC 5MP", precio: "", imagen: "https://placehold.co/400x300/1e293b/white?text=RANGER+RC+5MP" }
-  */
-];
+async function cargarProductos() {
+  try {
+    const csv   = await (await fetch(CSV_URL)).text();
+    const filas = parseCSV(csv);
+    const datos = filas.slice(1);
+
+    window.productosData = datos
+      .filter(f => f[COL.sku]?.trim())
+      .map(f => ({
+        sku:       f[COL.sku].trim(),
+        nombre:    (f[COL.nombre]    || "").trim(),
+        categoria: (f[COL.categoria] || "").trim(),
+        precio:    Number(f[COL.precio]) || 0,
+        stock:     Number(f[COL.stock]) || 0,
+        rubro:     (f[COL.rubro]     || "").trim(),
+        imagen:    `imagenes/${f[COL.sku].trim()}.jpeg`,
+      }))
+      .filter(p =>
+          p.rubro.toUpperCase() === RUBRO_TIENDA &&
+          p.nombre
+        )
+
+    // ← LA CLAVE: re-inyecta los productos custom y VUELVE a pintar la grilla
+    if (typeof cargarProductosCustom === "function") cargarProductosCustom();
+    if (typeof renderGrid === "function") renderGrid();
+  } catch (e) {
+    console.error("No se pudo cargar el catálogo:", e);
+  }
+}
+
+// Parser CSV que respeta comas y saltos de línea dentro de comillas
+function parseCSV(texto) {
+  const filas = []; let campo = "", fila = [], comillas = false;
+  for (let i = 0; i < texto.length; i++) {
+    const c = texto[i];
+    if (comillas) {
+      if (c === '"' && texto[i + 1] === '"') { campo += '"'; i++; }
+      else if (c === '"') comillas = false;
+      else campo += c;
+    } else {
+      if (c === '"') comillas = true;
+      else if (c === ",")  { fila.push(campo); campo = ""; }
+      else if (c === "\n") { fila.push(campo); filas.push(fila); fila = []; campo = ""; }
+      else if (c !== "\r") campo += c;
+    }
+  }
+  if (campo !== "" || fila.length) { fila.push(campo); filas.push(fila); }
+  return filas;
+}
+
+// Inicia vacío para que init() de app.js no falle mientras llega el Sheet
+window.productosData = window.productosData || [];
+cargarProductos();
