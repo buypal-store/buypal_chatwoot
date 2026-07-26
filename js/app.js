@@ -89,7 +89,7 @@ function renderGrid() {
       setTimeout(() => { this.textContent = 'Agregar'; }, 600);
     });
   });
-}S
+}
 
 // ---------- CONTADOR DEL CARRITO ----------
 function actualizarContador() {
