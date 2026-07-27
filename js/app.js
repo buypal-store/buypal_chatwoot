@@ -8,7 +8,13 @@ const state = {
   cartSeq: 0,
   finalTotal: 0
 };
-
+// Precios de upgrade para memorias (ajustar según se necesite)
+const MEMORY_UPGRADE_PRICES = {
+  '64GB': 0,      // regalo base
+  '128GB': 40,     
+  '256GB': 100,
+  '512GB': 200     
+};
 const el = (id) => document.getElementById(id);
 // Quita tildes, pasa a minúsculas y convierte separadores en espacios
 function normalizar(txt) {
@@ -85,6 +91,19 @@ function renderGrid() {
         type: 'producto'
       });
 
+      const memoriaBase = (window.productosData || []).find(p => p.sku === "MEMORIA-64GB");
+         if (memoriaBase && Number(memoriaBase.stock) > 0) {
+           state.cart.push({
+             cartId: ++state.cartSeq,
+             sku: memoriaBase.sku,
+             nombre: memoriaBase.nombre || "Memoria 64GB (Regalo)",
+             precio: 0,
+             originalPrice: 0,
+             type: 'regalo',
+             isMemory: true,
+             memoryCapacity: '64GB'   // propiedad para identificar la capacidad actual
+     });   
+      }
       actualizarContador();
       this.textContent = '✓ Agregado';
       setTimeout(() => { this.textContent = 'Agregar'; }, 600);
@@ -182,35 +201,67 @@ function renderResumen() {
   lines.appendChild(table);
 
   const tbody = table.querySelector("#resumenTablaBody");
-  state.cart.forEach(item => {
+  
+state.cart.forEach(item => {
     const row = document.createElement("tr");
-    row.innerHTML = `
-      <td style="padding:6px 8px; border-bottom:1px solid var(--border); font-size:11px; color:var(--muted);">${item.sku}</td>
-      <td style="padding:6px 8px; border-bottom:1px solid var(--border);">${item.nombre}</td>
-      <td style="padding:6px 8px; border-bottom:1px solid var(--border); text-align:right; font-weight:700;">
-        <input type="number"
-               class="resumen-price-input"
-               value="${item.precio}"
-               data-original="${item.originalPrice ?? item.precio}"
-               data-cart-id="${item.cartId}"
-               style="width:90px; text-align:right; font-weight:700; border:1px solid var(--border); border-radius:6px; padding:4px 8px; background:#fff;" />
-      </td>
-      <td style="padding:6px 8px; border-bottom:1px solid var(--border); text-align:center;">
-        <button class="btn-regalo-toggle" data-cart-id="${item.cartId}"
-                style="cursor:pointer; font-size:16px; background:none; border:none;"
-                title="Alternar regalo">${item.precio === 0 ? '🎁' : '🎁'}</button>
-      </td>
-      <td style="padding:6px 8px; border-bottom:1px solid var(--border); text-align:center;">
-        <button class="btn-eliminar-item" data-cart-id="${item.cartId}"
-                style="cursor:pointer; font-size:15px; background:none; border:none; color:#ef4444; font-weight:700; transition:transform .15s;"
-                onmouseenter="this.style.transform='scale(1.3)'"
-                onmouseleave="this.style.transform='scale(1)'"
-                title="Eliminar producto">✕</button>
-      </td>
-    `;
-    tbody.appendChild(row);
-  });
 
+    if (item.isMemory) {
+        // Fila especial para memorias con botones +/-
+        row.innerHTML = `
+          <td style="padding:6px 8px; border-bottom:1px solid var(--border); font-size:11px; color:var(--muted);">
+            ${item.sku}
+          </td>
+          <td style="padding:6px 8px; border-bottom:1px solid var(--border);">
+            ${item.nombre}
+            <div style="display:inline-flex; align-items:center; margin-left:12px; gap:6px;">
+              <button class="memoria-downgrade" data-cart-id="${item.cartId}"
+                style="width:24px; height:24px; border-radius:50%; border:1px solid #ccc; background:#f9f9f9; cursor:pointer; font-weight:bold;">−</button>
+              <span class="memoria-capacidad" style="font-weight:600; min-width:50px; text-align:center;">${item.memoryCapacity}</span>
+              <button class="memoria-upgrade" data-cart-id="${item.cartId}"
+                style="width:24px; height:24px; border-radius:50%; border:1px solid #ccc; background:#f9f9f9; cursor:pointer; font-weight:bold;">+</button>
+            </div>
+          </td>
+          <td style="padding:6px 8px; border-bottom:1px solid var(--border); text-align:right; font-weight:700;">
+            ${formatPEN(item.precio)}
+          </td>
+          <td style="padding:6px 8px; border-bottom:1px solid var(--border); text-align:center;">
+            <!-- sin botón de regalo para memorias -->
+          </td>
+          <td style="padding:6px 8px; border-bottom:1px solid var(--border); text-align:center;">
+            <button class="btn-eliminar-item" data-cart-id="${item.cartId}"
+              style="cursor:pointer; font-size:15px; background:none; border:none; color:#ef4444; font-weight:700;"
+              title="Eliminar producto">✕</button>
+          </td>
+        `;
+    } else {
+        // Fila normal (productos comunes) – se mantiene igual que antes
+        row.innerHTML = `
+          <td style="padding:6px 8px; border-bottom:1px solid var(--border); font-size:11px; color:var(--muted);">${item.sku}</td>
+          <td style="padding:6px 8px; border-bottom:1px solid var(--border);">${item.nombre}</td>
+          <td style="padding:6px 8px; border-bottom:1px solid var(--border); text-align:right; font-weight:700;">
+            <input type="number"
+                   class="resumen-price-input"
+                   value="${item.precio}"
+                   data-original="${item.originalPrice ?? item.precio}"
+                   data-cart-id="${item.cartId}"
+                   style="width:90px; text-align:right; font-weight:700; border:1px solid var(--border); border-radius:6px; padding:4px 8px; background:#fff;" />
+          </td>
+          <td style="padding:6px 8px; border-bottom:1px solid var(--border); text-align:center;">
+            <button class="btn-regalo-toggle" data-cart-id="${item.cartId}"
+                    style="cursor:pointer; font-size:16px; background:none; border:none;"
+                    title="Alternar regalo">${item.precio === 0 ? '🎁' : '🎁'}</button>
+          </td>
+          <td style="padding:6px 8px; border-bottom:1px solid var(--border); text-align:center;">
+            <button class="btn-eliminar-item" data-cart-id="${item.cartId}"
+                    style="cursor:pointer; font-size:15px; background:none; border:none; color:#ef4444; font-weight:700; transition:transform .15s;"
+                    onmouseenter="this.style.transform='scale(1.3)'"
+                    onmouseleave="this.style.transform='scale(1)'"
+                    title="Eliminar producto">✕</button>
+          </td>
+        `;
+    }
+    tbody.appendChild(row);
+});
   document.querySelectorAll('.resumen-price-input').forEach(input => {
     input.addEventListener('focus', function() {
       this.select();
@@ -266,7 +317,35 @@ function renderResumen() {
       eliminarDelCarrito(cartId);
     });
   });
+// ✅ Manejar cambios de capacidad en memorias
+document.querySelectorAll('.memoria-upgrade, .memoria-downgrade').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const cartId = parseInt(this.dataset.cartId);
+        const item = state.cart.find(i => i.cartId === cartId);
+        if (!item || !item.isMemory) return;
 
+        const capacities = ['64GB', '128GB', '256GB', '512GB'];
+        let currentIdx = capacities.indexOf(item.memoryCapacity);
+        if (currentIdx === -1) currentIdx = 0;
+
+        const isUpgrade = this.classList.contains('memoria-upgrade');
+        const newIdx = isUpgrade ? Math.min(currentIdx + 1, capacities.length - 1)
+                                 : Math.max(currentIdx - 1, 0);
+        if (newIdx === currentIdx) return; // ya está en el límite
+
+        const newCap = capacities[newIdx];
+        item.memoryCapacity = newCap;
+        item.sku = `MEMORIA-${newCap}`;
+        item.nombre = `Memoria ${newCap}` + (newCap === '64GB' ? ' (Regalo)' : '');
+        item.precio = MEMORY_UPGRADE_PRICES[newCap] || 0;
+        item.originalPrice = item.precio;
+
+        // Recalcular y refrescar
+        const nuevoSubtotal = state.cart.reduce((sum, i) => sum + i.precio, 0);
+        state.finalTotal = nuevoSubtotal;
+        renderResumen(); // repinta la tabla
+    });
+});
   const totalBlock = document.createElement("div");
   totalBlock.className = "summary-totals";
   totalBlock.innerHTML = `
