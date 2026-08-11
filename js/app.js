@@ -91,8 +91,8 @@ function renderGrid() {
         type: 'producto'
       });
 
-// Regalo de memoria SOLO para categoría "BUYPAL SECURITY"
-      const esSecurity = normalizar(prod.categoria) === normalizar("BUYPAL SECURITY");
+// Regalo de memoria SOLO para categoría "Seguridad"
+      const esSecurity = normalizar(prod.categoria) === normalizar("Seguridad");
       const memoriaBase = (window.productosData || []).find(p => p.sku === "MEMORIA-64GB");
       if (esSecurity && memoriaBase && Number(memoriaBase.stock) > 0) {
         state.cart.push({
