@@ -91,18 +91,20 @@ function renderGrid() {
         type: 'producto'
       });
 
+// Regalo de memoria SOLO para categoría "BUYPAL SECURITY"
+      const esSecurity = normalizar(prod.categoria) === normalizar("BUYPAL SECURITY");
       const memoriaBase = (window.productosData || []).find(p => p.sku === "MEMORIA-64GB");
-         if (memoriaBase && Number(memoriaBase.stock) > 0) {
-           state.cart.push({
-             cartId: ++state.cartSeq,
-             sku: memoriaBase.sku,
-             nombre: memoriaBase.nombre || "Memoria 64GB (Regalo)",
-             precio: 0,
-             originalPrice: 0,
-             type: 'regalo',
-             isMemory: true,
-             memoryCapacity: '64GB'   // propiedad para identificar la capacidad actual
-     });   
+      if (esSecurity && memoriaBase && Number(memoriaBase.stock) > 0) {
+        state.cart.push({
+          cartId: ++state.cartSeq,
+          sku: memoriaBase.sku,
+          nombre: memoriaBase.nombre || "Memoria 64GB (Regalo)",
+          precio: 0,
+          originalPrice: 0,
+          type: 'regalo',
+          isMemory: true,
+          memoryCapacity: '64GB'
+        });
       }
       actualizarContador();
       this.textContent = '✓ Agregado';
