@@ -11,6 +11,7 @@ const IMAGENES_MANUALES = {
   "CRUISER DUAL - 5MP": "imagenes/cruiser-dual-5mp.jpeg",
   "FOCO IMOU - 5MP": "imagenes/foco-imou-5mp.jpeg",
   "CRUISER CHIP - AOV PT": "imagenes/cruiser-chip-aov-pt.jpeg",
+  "CRUISER TRIPLE - 5MP": "imagenes/cruiser-triple-5mp.jpeg",
 
 
   
