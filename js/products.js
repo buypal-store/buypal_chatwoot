@@ -39,6 +39,13 @@ async function cargarProductos() {
           p.nombre
         )
 
+        // 🔁 Acá se reemplazan las imágenes si el SKU está en IMAGENES_MANUALES
+    window.productosData.forEach(prod => {
+      if (IMAGENES_MANUALES[prod.sku]) {
+        prod.imagen = IMAGENES_MANUALES[prod.sku];
+      }
+    });
+
     // ← LA CLAVE: re-inyecta los productos custom y VUELVE a pintar la grilla
     if (typeof cargarProductosCustom === "function") cargarProductosCustom();
     if (typeof renderGrid === "function") renderGrid();
