@@ -7,7 +7,7 @@ const IMAGENES_MANUALES = {
   "CRUISER Z - 5MP": "imagenes/cruiser-z-5mp.jpeg",
   "RANGER MINI - 5MP": "imagenes/ranger-mini-5mp.jpeg",
   "RANGER DUAL LENS - 5MP": "imagenes/ranger-dual-lens-5mp.jpeg",
-  
+  "AURORA TITAN PRO - 6MP": "imagenes/aurora-titan-pro-6mp.jpeg",
 };
 
 // === Catálogo Strenko — se alimenta solo desde el Google Sheet ===
