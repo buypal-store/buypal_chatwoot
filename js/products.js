@@ -1,11 +1,11 @@
 // Imágenes personalizadas por SKU (sobrescriben la automática "imagenes/SKU.jpeg")
 const IMAGENES_MANUALES = {
-  "RANGER MINI - 5MP": "imagenes/ranger-mini-5mp.jpeg",
   "FOCO IMOU - 5MP": "imagenes/foco-imou-5mp.jpeg",
   "RANGER 2 PRO - 5MP": "imagenes/ranger-2-pro-5mp.jpeg",
   "RANGER 2 PRO - 4K": "imagenes/ranger-2-pro-4k.jpeg",
   "CRUISER PANO Z - 13MP": "imagenes/cruiser-pano-z-13mp.jpeg",
   "CRUISER Z - 5MP": "imagenes/cruiser-z-5mp.jpeg",
+  "RANGER MINI - 5MP": "imagenes/ranger-mini-5mp.jpeg",
   
 };
 
