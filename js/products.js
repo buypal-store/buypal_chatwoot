@@ -2,6 +2,7 @@
 const IMAGENES_MANUALES = {
   "RANGER MINI - 5MP": "imagenes/ranger-mini-5mp.jpeg",
   "FOCO IMOU - 5MP": "imagenes/foco-imou-5mp.jpeg",
+  "RANGER 2 PRO - 5MP": "imagenes/ranger-2-pro-5mp.jpeg",
   
 };
 
