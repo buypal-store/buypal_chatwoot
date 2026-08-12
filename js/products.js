@@ -10,6 +10,10 @@ const IMAGENES_MANUALES = {
   "AURORA TITAN PRO - 6MP": "imagenes/aurora-titan-pro-6mp.jpeg",
   "CRUISER DUAL - 5MP": "imagenes/cruiser-dual-5mp.jpeg",
   "FOCO IMOU - 5MP": "imagenes/foco-imou-5mp.jpeg",
+  "CRUISER CHIP - AOV PT": "imagenes/cruiser-chip-aov-pt.jpeg",
+
+
+  
 };
 
 // === Catálogo Strenko — se alimenta solo desde el Google Sheet ===
