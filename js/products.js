@@ -6,6 +6,7 @@ const IMAGENES_MANUALES = {
   "CRUISER PANO Z - 13MP": "imagenes/cruiser-pano-z-13mp.jpeg",
   "CRUISER Z - 5MP": "imagenes/cruiser-z-5mp.jpeg",
   "RANGER MINI - 5MP": "imagenes/ranger-mini-5mp.jpeg",
+  "RANGER DUAL LENS - 5MP": "imagenes/ranger-dual-lens-5mp.jpeg",
   
 };
 
