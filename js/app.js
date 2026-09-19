@@ -12,7 +12,7 @@ const state = {
 const MEMORY_UPGRADE_PRICES = {
   '64GB': 0,      // regalo base
   '128GB': 40,     
-  '256GB': 100,
+  '256GB': 120,
   '512GB': 200     
 };
 const el = (id) => document.getElementById(id);
