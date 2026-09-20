@@ -104,7 +104,9 @@ function renderGrid() {
 // (una memoria por cámara: la línea de regalo hereda la misma cantidad)
       const esSecurity = normalizar(prod.categoria) === normalizar("Seguridad");
       const memoriaBase = (window.productosData || []).find(p => p.sku === "MEMORIA-64GB");
-      if (esSecurity && memoriaBase && Number(memoriaBase.stock) > 0) {
+      // Las memorias (cualquier capacidad) no generan memoria de regalo
+      const esMemoria = String(prod.sku || '').toUpperCase().startsWith("MEMORIA-");
+      if (esSecurity && !esMemoria && memoriaBase && Number(memoriaBase.stock) > 0) {
         state.cart.push({
           cartId: ++state.cartSeq,
           sku: memoriaBase.sku,
