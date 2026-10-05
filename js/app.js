@@ -13,7 +13,7 @@ const MEMORY_UPGRADE_PRICES = {
   '64GB': 0,      // regalo base
   '128GB': 50,
   '256GB': 150,
-  '512GB': 280
+  '512GB': 300
 };
 const el = (id) => document.getElementById(id);
 // Quita tildes, pasa a minúsculas y convierte separadores en espacios
