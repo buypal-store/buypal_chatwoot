@@ -100,13 +100,15 @@ function renderGrid() {
         type: 'producto'
       });
 
-// Regalo de memoria SOLO para categoría "Seguridad"
+// Regalo de memoria SOLO para CÁMARAS de "Seguridad" (orden de Luis, 13-nov-2026).
+// Los accesorios (brazos, router/extensor, NVR, cables, POE, timbre, enchufe,
+// alarma, cámara simulada, memorias) NO llevan memoria de regalo.
 // (una memoria por cámara: la línea de regalo hereda la misma cantidad)
       const esSecurity = normalizar(prod.categoria) === normalizar("Seguridad");
       const memoriaBase = (window.productosData || []).find(p => p.sku === "MEMORIA-64GB");
-      // Las memorias (cualquier capacidad) no generan memoria de regalo
-      const esMemoria = String(prod.sku || '').toUpperCase().startsWith("MEMORIA-");
-      if (esSecurity && !esMemoria && memoriaBase && Number(memoriaBase.stock) > 0) {
+      const esCamara = /^(CAMIP-|CRUISER |RANGER |BULLET |AURORA |EZVIZ-H|TAPO-C|FOCO IMOU)/
+        .test(String(prod.sku || '').trim().toUpperCase());
+      if (esSecurity && esCamara && memoriaBase && Number(memoriaBase.stock) > 0) {
         state.cart.push({
           cartId: ++state.cartSeq,
           sku: memoriaBase.sku,
